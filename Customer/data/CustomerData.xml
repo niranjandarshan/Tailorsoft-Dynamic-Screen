@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-facade-xml type="seed-initial">
+    <Customer.Customerent customerid="1" description="Purchase From Store 1" price="100"/>
+    <Customer.Customerent customerid="2" description="Purchase from store 2" price="200"/>
+</entity-facade-xml>

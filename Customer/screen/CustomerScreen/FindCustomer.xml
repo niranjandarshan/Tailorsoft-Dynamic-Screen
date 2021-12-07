@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
+        require-authentication="false">
+
+    <transition name="createCustomer">
+        <service-call name="Customer.CustomerService.create#Customerent"/>
+        <default-response url="."/>
+    </transition>
+
+    <transition name="deleteCustomer">
+        <service-call name="Customer.CustomerService.delete#Customerent"/>
+        <default-response url="."/>
+    </transition>
+
+    <transition name="updateCustomer">
+        <service-call name="Customer.CustomerService.update#Customerent"/>
+        <default-response url="."/>
+    </transition>
+
+    <transition name="findCustomer" >
+
+        <service-call name="Customer.CustomerService.find#Customerent"/>
+        <default-response url="."/>
+    </transition>
+
+
+
+    <subscreens default-item="FindCustom"/>
+   <actions>
+        <entity-find entity-name="Customer.Customerent" list="customerList">
+            <search-form-inputs/></entity-find>
+    </actions>
+    <widgets>
+        <container-dialog id="CreateCustomerDialog" button-text="Create Customer">
+            <form-single name="CreateCustomer" transition="createCustomer">
+                <auto-fields-entity entity-name="Customer.Customerent" field-type="edit"/>
+                <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
+            </form-single>
+        </container-dialog>
+
+        <container-dialog id="DeleteCustomerDialog" button-text="Delete Customer">
+            <form-single name="DeleteCustomer" transition="deleteCustomer">
+                <auto-fields-entity entity-name="Customer.Customerent" field-type="edit" include="pk"/>
+                <field name="submitButton"><default-field title="Delete"><submit/></default-field></field>
+            </form-single>
+        </container-dialog>
+
+        <container-dialog id="UpdateCustomerDialog" button-text="Update Customer">
+            <form-single name="UpdateCustomer" transition="updateCustomer">
+                <auto-fields-entity entity-name="Customer.Customerent" field-type="edit" include="all"/>
+                <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
+            </form-single>
+        </container-dialog>
+
+        <container-dialog id="FindCustomerDialog" button-text="Find Customer">
+            <form-single name="FindCustomer" transition="findCustomer">
+                <auto-fields-entity entity-name="Customer.Customerent" field-type="edit" include="pk"/>
+                <field name="submitButton"><default-field title="Find"><submit/></default-field></field>
+            </form-single>
+        </container-dialog>
+
+
+        <form-list name="ListCustomers" list="customerList" header-dialog="true" skip-form="true" select-columns="true"
+                    show-all-button="true" show-csv-button="true" show-pdf-button="true" show-xlsx-button="true" show-text-button="true">
+
+                <auto-fields-entity entity-name="Customer.Customerent" field-type="find-display"/>
+                <field name="description">
+                    <header-field show-order-by="true"><text-find hide-options="true"/></header-field>
+                    <default-field><display/></default-field>
+                </field>
+        </form-list>
+
+        <subscreens default-item="FindCustom"/>
+        <subscreens-active/>
+
+    </widgets>
+</screen>
